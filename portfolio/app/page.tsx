@@ -23,6 +23,7 @@ import Image from "next/image";
 import { FaGraduationCap, FaSchool } from "react-icons/fa";
 import { FaOpencart, FaShare } from "react-icons/fa6";
 // import { Typewriter } from 'react-typewriter-effect';
+import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Home() {
   const [displayText, setDisplayText] = useState("");
@@ -160,7 +161,7 @@ export default function Home() {
         >
           <Canvas>
             <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} intensity={1.2} />
+            <directionalLight position={[5, 5, 5]} intensity={1.4} />
             <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
             <Sphere args={[2, 64, 64]}>
               <meshStandardMaterial
@@ -540,6 +541,25 @@ export default function Home() {
             </div>
           </motion.section>
           
+  {/* Enhanced Projects Section */}
+  <motion.section
+            id="projects"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            // Changed background: from glassmorphism to a soft gradient with pattern
+            className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 bg-[url('/pattern.svg')] bg-repeat rounded-2xl p-8 mb-20 border-2 border-blue-700/30 shadow-2xl"
+          >
+            <h2 
+              className="text-4xl font-extrabold text-white mb-10 text-center tracking-tight"
+            >
+              Showcase
+            </h2>
+            <ProjectCarousel />
+          </motion.section>
+
+
           {/* Certifications Section - styled like Technical Skills */}
           <motion.section
             id="certifications"
@@ -651,23 +671,7 @@ export default function Home() {
             </div>
           </motion.section>
 
-          {/* Enhanced Projects Section */}
-          <motion.section
-            id="projects"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            // Changed background: from glassmorphism to a soft gradient with pattern
-            className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 bg-[url('/pattern.svg')] bg-repeat rounded-2xl p-8 mb-20 border-2 border-blue-700/30 shadow-2xl"
-          >
-            <h2 
-              className="text-4xl font-extrabold text-white mb-10 text-center tracking-tight"
-            >
-              Showcase
-            </h2>
-            <ProjectCarousel />
-          </motion.section>
+        
             
                
             
@@ -680,31 +684,47 @@ export default function Home() {
             viewport={{ once: true }}
             className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-20"
           >
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Let's Connect</h2>
+            <h2 className="text-4xl font-bold text-white mb-8 text-center">Let's Connect</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Contact Info Cards */}
               <div className="space-y-6">
-                <div className="flex items-center bg-blue-900/80 rounded-xl p-5 gap-4 shadow-lg">
-                  <span className="bg-blue-500 text-white rounded-full p-3 text-2xl">
-                    <svg width="24" height="24" fill="none"><path d="M4 4h16v16H4V4z" fill="none"/><path d="M4 4l8 8 8-8" stroke="#fff" strokeWidth="2"/></svg>
+                <div className="flex items-center bg-blue-900/80 rounded-xl p-5 gap-4 shadow-lg transition-transform duration-300 hover:bg-blue-700/80 hover:scale-105">
+                  <span className="bg-blue-500 text-white rounded-full p-3 text-2xl transition-transform duration-300 hover:scale-125">
+                    {/* Email Icon */}
+                    <FaEnvelope />
                   </span>
                   <div>
-                    <div className="text-white font-semibold">Email</div>
-                    <div className="text-gray-300 text-sm">sprasath003@gmail.com</div>
+                    <div className="text-white font-semibold"
+                    >Email</div>
+                    <a 
+                      href="mailto:sprasath003@gmail.com"
+                      className="text-gray-300 text-sm hover:text-purple-400 transition-colors"
+                    >
+                      sprasath003@gmail.com
+                    </a>
                   </div>
                 </div>
-                <div className="flex items-center bg-purple-900/80 rounded-xl p-5 gap-4 shadow-lg">
-                  <span className="bg-purple-500 text-white rounded-full p-3 text-2xl">
-                    <svg width="24" height="24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="2"/><path d="M8 12h8" stroke="#fff" strokeWidth="2"/></svg>
+                <div className="flex items-center bg-purple-900/80 rounded-xl p-5 gap-4 shadow-lg transition-transform duration-300 hover:bg-purple-700/80 hover:scale-105">
+                  <span className="bg-purple-500 text-white rounded-full p-3 text-2xl transition-transform duration-300 hover:scale-125">
+                    {/* Phone Icon */}
+                    <FaPhone />
                   </span>
                   <div>
                     <div className="text-white font-semibold">Phone</div>
-                    <div className="text-gray-300 text-sm">+91 9994565367</div>
+                    <a 
+                      href="https://wa.me/+919994565367"
+                      target="_blank"
+                      rel="noopener noreferrer" 
+                      className="text-gray-300 text-sm hover:text-blue-400 transition-colors"
+                    >
+                      +91 9994565367
+                    </a>
                   </div>
                 </div>
-                <div className="flex items-center bg-pink-900/80 rounded-xl p-5 gap-4 shadow-lg">
-                  <span className="bg-pink-500 text-white rounded-full p-3 text-2xl">
-                    <svg width="24" height="24" fill="none"><circle cx="12" cy="10" r="3" stroke="#fff" strokeWidth="2"/><path d="M12 13v5" stroke="#fff" strokeWidth="2"/></svg>
+                <div className="flex items-center bg-pink-900/80 rounded-xl p-5 gap-4 shadow-lg transition-transform duration-300 hover:bg-pink-700/80 hover:scale-105">
+                  <span className="bg-pink-500 text-white rounded-full p-3 text-2xl transition-transform duration-300 hover:scale-125">
+                    {/* Location Icon */}
+                    <FaMapMarkerAlt />
                   </span>
                   <div>
                     <div className="text-white font-semibold">Location</div>
@@ -713,29 +733,35 @@ export default function Home() {
                 </div>
               </div>
               {/* Contact Form */}
-              <form className="space-y-6">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <textarea
-                  placeholder="Your Message"
-                  rows={4}
-                  className="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:from-purple-500 hover:to-blue-500 transition-all"
-                >
-                  Send Message
-                </button>
-              </form>
+<form className="space-y-6">
+  <div>
+    <input
+      type="text required"
+      placeholder="Your Name"
+      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+    />
+  </div>
+  <div>
+    <input
+      type="email required"
+      placeholder="Your Email "
+      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+    />
+  </div>
+  <div>
+    <textarea
+      placeholder="Your Message"
+      rows={4}
+      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+    ></textarea>
+  </div>
+  <button
+    type="submit"
+    className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-purple-600 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 active:scale-95"
+  >
+    Send Message
+  </button>
+</form>
             </div>
           </motion.section>
           {/* Footer */}
