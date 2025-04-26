@@ -1,0 +1,32 @@
+{
+  "name": "protfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^9.1.2",
+    "@tailwindcss/postcss": "^4.1.4",
+    "autoprefixer": "^10.4.21",
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^11.0.0",
+    "install": "^0.13.0",
+    "next": "^15.3.1",
+    "postcss": "^8.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.0.1",
+    "react-typewriter-effect": "^1.0.0",
+    "tailwindcss": "^4.1.4",
+    "three": "^0.176.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "typescript": "5.8.3"
+  }
+}
