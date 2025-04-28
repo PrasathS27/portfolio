@@ -800,8 +800,53 @@ export default function Home() {
           </motion.section>
           {/* Footer */}
           <footer className="mt-20 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} Prasath S. All rights reserved.</p>
-          </footer>
+      {/* Social Icons */}
+      <div className="flex justify-center gap-8 mb-6">
+        <a
+          href="https://github.com/PrasathS27"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
+          aria-label="GitHub"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href="https://linkedin.com/in/prasaths27"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
+          aria-label="LinkedIn"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href="mailto:sprasath003@gmail.com"
+          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
+          aria-label="Email"
+        >
+          <FaEnvelope />
+        </a>
+      </div>
+
+      {/* Made with love */}
+      <div className="flex justify-center items-center gap-2 text-base sm:text-lg text-gray-300 font-medium mb-4">
+        <span>Made with</span>
+         <FooterHeart />
+        <span>
+          by <span className="font-semibold text-white"> Prasath Subramainan</span>
+        </span>
+      </div>
+
+      {/* Divider */}
+      <div className="w-full max-w-xs mx-auto border-t border-blue-900/40 my-4 opacity-30"></div>
+
+      {/* Copyright */}
+      <p className="text-md text-gray-500 tracking-wide">
+        © {new Date().getFullYear()} Prasath S | All rights reserved.
+      </p>
+    </footer>
+
         </div>
       </div>
     </div>
@@ -996,3 +1041,18 @@ function ProjectCarousel() {
     </div>
   );
 }
+function FooterHeart() {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <span
+      className={`text-xl transition-colors duration-200 ${hovered ? "text-blue-500" : "text-red-500"} animate-pulse`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ cursor: "pointer" }}
+    >
+      {hovered ? "💙" : "🤍"}
+    </span>
+  );
+}
+
+<FooterHeart />
