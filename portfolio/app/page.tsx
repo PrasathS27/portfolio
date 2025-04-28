@@ -25,6 +25,68 @@ import { FaOpencart, FaShare } from "react-icons/fa6";
 // import { Typewriter } from 'react-typewriter-effect';
 import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
+function ContactForm() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value.trim();
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value.trim();
+    if (!name || !email) {
+      form.reportValidity();
+      return;
+    }
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full py-10">
+        <span className="text-3xl text-blue-400 mb-4">🎉</span>
+        <h3 className="text-2xl font-bold text-white mb-2">Thanks for connecting!</h3>
+      </div>
+    );
+  }
+
+  return (
+    <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+      <div>
+        <input
+          name="name"
+          type="text"
+          required
+          placeholder="Your Name"
+          className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+        />
+      </div>
+      <div>
+        <input
+          name="email"
+          type="email"
+          required
+          placeholder="Your Email "
+          className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
+        />
+      </div>
+      <div>
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          rows={4}
+          className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-purple-600 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 active:scale-95"
+      >
+        Send Message
+      </button>
+    </form>
+  );
+}
+
 export default function Home() {
   const [displayText, setDisplayText] = useState("");
   const fullText = "Prasath Subramanian";
@@ -733,35 +795,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Contact Form */}
-<form className="space-y-6">
-  <div>
-    <input
-      type="text required"
-      placeholder="Your Name"
-      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
-    />
-  </div>
-  <div>
-    <input
-      type="email required"
-      placeholder="Your Email "
-      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
-    />
-  </div>
-  <div>
-    <textarea
-      placeholder="Your Message"
-      rows={4}
-      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
-    ></textarea>
-  </div>
-  <button
-    type="submit"
-    className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-purple-600 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 active:scale-95"
-  >
-    Send Message
-  </button>
-</form>
+              <ContactForm />
             </div>
           </motion.section>
           {/* Footer */}
