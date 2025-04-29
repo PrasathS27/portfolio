@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sphere, Stars } from "@react-three/drei";
 
 import Link from "next/link";
-import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaTools, FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaTools, FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaSun, FaMoon, FaBars } from "react-icons/fa";
 import { 
   SiNextdotjs, SiRedux, SiTypescript, SiTailwindcss, SiExpress, SiNestjs, SiSpringboot, 
   SiGithubactions, SiFigma, SiPostman, 
@@ -43,8 +43,8 @@ function ContactForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center h-full py-10">
-        <span className="text-3xl text-blue-400 mb-4">🎉</span>
-        <h3 className="text-2xl font-bold text-white mb-2">Thanks for connecting!</h3>
+        <span className="text-3xl text-blue-400 mb-4 animate-pulse">🎉</span>
+        <h3 className="text-2xl font-bold text-white mb-2">Thanks for Connection..!</h3>
       </div>
     );
   }
@@ -97,6 +97,9 @@ export default function Home() {
   // Scroll progress state
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // Navbar active section state
+  const [activeSection, setActiveSection] = useState("about");
+
   const [roleText, setRoleText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const roles = [
@@ -108,16 +111,41 @@ export default function Home() {
   const [currentRole, setCurrentRole] = useState(0);
   const [isErasing, setIsErasing] = useState(false);
 
+  // Mobile menu and theme toggle state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(progress);
+
+      // Scroll spy for navbar underline
+      const sections = ["about", "education", "skills", "projects", "certifications", "contact"];
+      let found = "about";
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 80 && rect.bottom > 80) {
+            found = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(found);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Scroll to top/home
+  const handleHomeClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setActiveSection("about");
+  };
 
   // Role typing animation effect
   useEffect(() => {
@@ -179,41 +207,94 @@ export default function Home() {
         transition={{ duration: 0.8, type: "spring" }}
         className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-gray-900/90 to-blue-900/90 shadow-lg"
       >
-        <nav className="container mx-auto flex items-center justify-between px-6 py-4">
+        <nav className="container mx-auto flex items-center justify-between px-4 md:px-6 py-4">
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6, type: "spring" }}
-            className="text-2xl font-bold text-white tracking-wide"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-2xl font-bold text-white tracking-wide cursor-pointer"
+            onClick={handleHomeClick}
           >
             Prasath | Portfolio
           </motion.div>
-          <ul className="flex gap-6 text-white font-medium">
-            {/* Animate nav links on hover */}
-            {["About", "Education", "Skills", "Projects", "Certifications", "Contact"].map((item, idx) => (
-              <motion.li
-                key={item}
-                whileHover={{ scale: 1.15, rotate: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  onClick={item === "About" ? handleAboutClick : undefined}
-                  className="relative px-2 py-1 transition-transform duration-200 hover:scale-110 active:scale-95
-                    before:content-[''] before:absolute before:left-0 before:-bottom-1 before:w-0 before:h-0.5 before:bg-blue-400
-                    before:transition-all before:duration-300 hover:before:w-full"
-                  style={{ display: "inline-block" }}
-                >
-                  {item}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
+          {/* Desktop Navbar */}
+          {(() => {
+            const navItems = [
+              "About",
+              "Education",
+              "Skills",
+              "Projects",
+              "Certifications",
+              "Contact"
+            ];
+            return (
+              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 text-white font-medium">
+                {navItems.map((item) => (
+                  <motion.li
+                    key={item}
+                    whileHover={{ scale: 1.15, rotate: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      onClick={item === "About" ? handleAboutClick : undefined}
+                      className={`relative px-2 py-1 transition-transform duration-200 hover:scale-110 active:scale-95
+                        before:content-[''] before:absolute before:left-0 before:-bottom-1 before:h-0.5 before:bg-blue-400
+                        before:transition-all before:duration-300
+                        ${activeSection === item.toLowerCase() ? "before:w-full font-bold text-blue-400" : "before:w-0"}
+                      `}
+                      style={{ display: "inline-block" }}
+                    >
+                      {item}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            );
+          })()}
+          {/* Mobile Navbar: Hamburger + Sun/Moon */}
+          <div className="flex items-center gap-4 md:hidden">
+            {/* Sun/Moon Toggle */}
+            <button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="text-yellow-400 text-2xl focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {darkMode ? <FaMoon /> : <FaSun />}
+            </button>
+            {/* Hamburger Menu */}
+            <button
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="text-white text-2xl focus:outline-none"
+              aria-label="Open menu"
+            >
+              <FaBars />
+            </button>
+          </div>
         </nav>
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-gradient-to-r from-gray-900 to-blue-900 absolute top-full left-0 w-full z-30 shadow-lg">
+            <ul className="flex flex-col items-center py-4 gap-4 text-white font-medium">
+              {["About", "Skills", "Projects", "Certifications", "Contact"].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-2"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
       </motion.header>
       {/* Add padding top to avoid content being hidden behind navbar */}
-      <div className="pt-24">
+      <div className="pt-24 px-2 md:px-4">
         {/* Enhanced 3D Background with Motion */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -244,7 +325,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className={`bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-20 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left ${
+            className={`bg-white/10 backdrop-blur-lg rounded-2xl p-4 md:p-8 mb-10 md:mb-20 max-w-full md:max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left ${
               aboutActive ? "animate-fade-in-scale" : ""
             } shadow-2xl hover:shadow-blue-500/30 transition-shadow duration-500`}
             whileHover={{ scale: 1.02, boxShadow: "0 8px 32px 0 rgba(59,130,246,0.25)" }}
@@ -376,7 +457,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mb-20"
+            className="mb-20 hidden md:block"
           >
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -888,7 +969,7 @@ function ProjectCarousel() {
       demoLabel: "Live Demo",
     },
     {
-      image: "/Figma.png",
+      image: "/portfolio.png",
       title: "Prasath | Portfolio ",
       description:
         "I built a user-friendly personal portfolio using React (with Next.js) and Tailwind CSS to showcase my professional achievements and skills. The portfolio integrates Framer Motion for animations, Three.js for 3D graphics, and React Icons for improved iconography. Built with TypeScript, JavaScript, JSX/TSX, HTML, and CSS, it is hosted on Firebase for seamless deployment and performance.",
