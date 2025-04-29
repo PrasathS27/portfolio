@@ -113,7 +113,7 @@ export default function Home() {
 
   // Mobile menu and theme toggle state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -191,23 +191,23 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900">
+    <div className={darkMode ? "dark min-h-screen" : "min-h-screen bg-gradient-to-br from-white to-blue-100"}>
       {/* Scroll Progress Bar */}
       <div
         style={{
           width: `${scrollProgress}%`,
           transition: "width 0.2s cubic-bezier(0.4,0,0.2,1)",
         }}
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-400 to-purple-500 z-50"
+        className={`fixed top-0 left-0 h-1 z-50 ${darkMode ? "bg-gradient-to-r from-blue-900 to-purple-900" : "bg-gradient-to-r from-blue-400 to-purple-500"}`}
       />
       {/* Enhanced Header with Motion */}
       <motion.header 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, type: "spring" }}
-        className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-gray-900/90 to-blue-900/90 shadow-lg"
+        className={`fixed top-0 left-0 w-full z-20 shadow-lg ${darkMode ? "bg-gradient-to-r from-gray-900/90 to-blue-900/90" : "bg-gradient-to-r from-white/90 to-blue-100/90"}`}
       >
-        <nav className="container mx-auto flex items-center justify-between px-4 md:px-6 py-4">
+        <nav className="container mx-auto flex items-center justify-between px-4 md:px-6 py-4 relative">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -228,7 +228,7 @@ export default function Home() {
               "Contact"
             ];
             return (
-              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 text-white font-medium">
+              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 text-white font-medium items-center">
                 {navItems.map((item) => (
                   <motion.li
                     key={item}
@@ -250,19 +250,21 @@ export default function Home() {
                     </a>
                   </motion.li>
                 ))}
+                {/* Sun/Moon Toggle as last nav item */}
+                <li>
+                  <button
+                    onClick={() => setDarkMode((prev) => !prev)}
+                    className="text-yellow-400 text-2xl focus:outline-none ml-2"
+                    aria-label="Toggle theme"
+                  >
+                    {darkMode ? <FaMoon /> : <FaSun />}
+                  </button>
+                </li>
               </ul>
             );
-          })()}
-          {/* Mobile Navbar: Hamburger + Sun/Moon */}
-          <div className="flex items-center gap-4 md:hidden">
-            {/* Sun/Moon Toggle */}
-            <button
-              onClick={() => setDarkMode((prev) => !prev)}
-              className="text-yellow-400 text-2xl focus:outline-none"
-              aria-label="Toggle theme"
-            >
-              {darkMode ? <FaMoon /> : <FaSun />}
-            </button>
+          })()} 
+          {/* Mobile Navbar: Hamburger only */}
+          <div className="flex items-center md:hidden">
             {/* Hamburger Menu */}
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -272,6 +274,7 @@ export default function Home() {
               <FaBars />
             </button>
           </div>
+
         </nav>
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
@@ -300,21 +303,24 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="fixed inset-0 z-0 h-screen"
+          className={`fixed inset-0 z-0 h-screen ${darkMode ? "bg-gradient-to-br from-gray-900 to-blue-900" : "bg-gradient-to-br from-white to-blue-100"}`}
         >
-          <Canvas>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} intensity={1.4} />
-            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-            <Sphere args={[2, 64, 64]}>
-              <meshStandardMaterial
-                color="#3b82f6"
-                metalness={0.7}
-                roughness={0.3}
-              />
-            </Sphere>
-            <Stars radius={100} depth={50} count={2000} factor={4} />
-          </Canvas>
+          {/* Render sphere only in dark mode */}
+          {darkMode && (
+            <Canvas>
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[5, 5, 5]} intensity={1.4} />
+              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+              <Sphere args={[2, 64, 64]}>
+                <meshStandardMaterial
+                  color="#3b82f6"
+                  metalness={0.7}
+                  roughness={0.3}
+                />
+              </Sphere>
+              <Stars radius={100} depth={50} count={2000} factor={4} />
+            </Canvas>
+          )}
         </motion.div>
         {/* Main Content */}
         <div className="relative z-10 container mx-auto px-4 py-20">
@@ -325,9 +331,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className={`bg-white/10 backdrop-blur-lg rounded-2xl p-4 md:p-8 mb-10 md:mb-20 max-w-full md:max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left ${
-              aboutActive ? "animate-fade-in-scale" : ""
-            } shadow-2xl hover:shadow-blue-500/30 transition-shadow duration-500`}
+            className={`rounded-2xl p-4 md:p-8 mb-10 md:mb-20 max-w-full md:max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left shadow-2xl transition-shadow duration-500
+              ${darkMode ? "bg-white/10 backdrop-blur-lg text-white" : "bg-white text-blue-700"}
+              ${aboutActive ? "animate-fade-in-scale" : ""}
+            `}
             whileHover={{ scale: 1.02, boxShadow: "0 8px 32px 0 rgba(59,130,246,0.25)" }}
           >
             {/* Text Content */}
@@ -341,7 +348,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+                className={`text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4${!darkMode ? " text-blue-700 bg-none" : ""}`}
               >
                 Prasath Subramanian
               </motion.h1>
