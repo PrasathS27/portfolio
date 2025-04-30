@@ -42,11 +42,15 @@ function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center h-full py-10">
-        <span className="text-3xl text-blue-400 mb-4 animate-pulse">🎉</span>
-        <h3 className= "text-2xl font-bold text-white mb-2"
-        
-        >Thanks for Connection..!</h3>
+      <div className={`flex flex-col items-center justify-center h-[60vh] py-10`}>
+        <span className="text-4xl mb-4 animate-pulse">🎉</span>
+        <h3 className={`text-3xl font-bold text-center
+          ${true
+            ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+            : "text-blue-800"}
+        `}>
+          Thanks for Connection..!
+        </h3>
       </div>
     );
   }
@@ -216,10 +220,10 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className={`text-2xl font-bold tracking-wide cursor-pointer ${
               darkMode
-                ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                ? "text-white-800 hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 hover:bg-clip-text hover:text-transparent"
                 : "bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
             }`}
-
+            
             onClick={handleHomeClick}
           >
             Prasath | Portfolio
@@ -235,7 +239,7 @@ export default function Home() {
               "Contact"
             ];
             return (
-              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 text-white font-medium items-center">
+              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 font-medium items-center">
                 {navItems.map((item) => (
                   <motion.li
                     key={item}
@@ -249,29 +253,38 @@ export default function Home() {
                       className={`relative px-2 py-1 transition-transform duration-200 hover:scale-110 active:scale-95
                         before:content-[''] before:absolute before:left-0 before:-bottom-1 before:h-0.5 before:bg-blue-400
                         before:transition-all before:duration-300
-                        ${activeSection === item.toLowerCase() ? "before:w-full font-bold text-blue-400" : "before:w-0"}
+                        ${
+                          activeSection === item.toLowerCase()
+                            ? "before:w-full font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                            : "before:w-0"
+                        }
+                        ${
+                          !darkMode
+                            ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                            : "text-white-800"
+                        }
                       `}
-                      style={{ display: "inline-block" }}
+                      style={{ display: "inline-block" } }
+
                     >
                       {item}
                     </a>
                   </motion.li>
                 ))}
-                {/* Sun/Moon Toggle as last nav item */}
-                <li>
-                  <button
-                    onClick={() => setDarkMode((prev) => !prev)}
-                    className="text-yellow-400 text-2xl focus:outline-none ml-2"
-                    aria-label="Toggle theme"
-                  >
-                    {darkMode ? <FaMoon /> : <FaSun />}
-                  </button>
-                </li>
+
               </ul>
             );
           })()} 
-          {/* Mobile Navbar: Hamburger only */}
-          <div className="flex items-center md:hidden">
+          {/* Mobile Navbar: Hamburger and Theme Toggle */}
+          <div className="flex items-center md:hidden gap-2">
+            {/* Sun/Moon Toggle for mobile */}
+            <button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="text-yellow-400 text-2xl focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {darkMode ? <FaMoon /> : <FaSun />}
+            </button>
             {/* Hamburger Menu */}
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -281,7 +294,16 @@ export default function Home() {
               <FaBars />
             </button>
           </div>
-
+          {/* Sun/Moon Toggle for desktop */}
+          <div className="hidden md:block ml-2">
+            <button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="text-yellow-400 text-2xl focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {darkMode ? <FaMoon /> : <FaSun />}
+            </button>
+          </div>
         </nav>
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
@@ -488,7 +510,11 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="text-4xl font-extrabold text-white mb-12 text-center tracking-tight"
+              className={`text-4xl font-extrabold mb-12 text-center tracking-tight ${
+                !darkMode
+                  ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                  : "text-white-800"
+              }`}
             >
               Education
             </motion.h2>
@@ -633,7 +659,11 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="text-4xl font-extrabold text-white mb-12 text-center tracking-tight"
+              className={`text-4xl font-extrabold mb-12 text-center tracking-tight ${
+                !darkMode
+                  ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                  : "text-white-800"
+              }`}
             >
               Skills & Tools
             </motion.h2>
@@ -719,7 +749,11 @@ export default function Home() {
             className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 bg-[url('/pattern.svg')] bg-repeat rounded-2xl p-8 mb-20 border-2 border-blue-700/30 shadow-2xl"
           >
             <h2 
-              className="text-4xl font-extrabold text-white mb-10 text-center tracking-tight"
+              className={`text-4xl font-extrabold mb-10 text-center tracking-tight ${
+                darkMode
+                  ? "text-white-800"
+                  : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              }`}
             >
               Showcase
             </h2>
@@ -736,7 +770,11 @@ export default function Home() {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-4xl font-extrabold text-white mb-10 text-center tracking-tight">Certifications</h2>
+            <h2 className={`text-4xl font-extrabold mb-10 text-center tracking-tight ${
+              darkMode
+                ? "text-white-800"
+                : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+            }`}>Certifications</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -746,10 +784,10 @@ export default function Home() {
                 whileHover={{ scale: 1.08, boxShadow: "0 8px 32px 0 rgba(59,130,246,0.25)" }}
                 className="bg-gradient-to-br from-blue-900/60 to-blue-600/30 rounded-2xl p-8 shadow-xl border border-blue-500/30 transition-all duration-300"
               >
-                <h3 className="text-xl font-bold text-indigo-200 mb-2">Web Development</h3>
-                <p className="text-gray-300">Accord Info Matrix</p>
+                <h3 className="text-xl font-bold text-indigo-200 mb-2">Software Development</h3>
+                <p className="text-gray-300">Neartekpod APAC Technologies</p>
                 <motion.a
-                  href="https://drive.google.com/file/d/1d-IZRSNOJDF6g9TIEzyUjuLssLdj37xo/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1d1sJn7fxO2CWttNknEmb1x-LTIaOdvlM/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.08 }}
@@ -771,11 +809,11 @@ export default function Home() {
                 whileHover={{ scale: 1.08, boxShadow: "0 8px 32px 0 rgba(168,139,250,0.25)" }}
                 className="bg-gradient-to-br from-purple-900/60 to-purple-600/30 rounded-2xl p-8 shadow-xl border border-purple-500/30 transition-all duration-300"
               >
-                <h3 className="text-xl font-bold text-purple-200 mb-2">Python Programming</h3>
+                <h3 className="text-xl font-bold text-purple-200 mb-2">Python & Web Development</h3>
                 <p className="text-gray-300">Accord Info Matrix</p>
 
                 <motion.a
-                  href="https://drive.google.com/file/d/1CmS7PRedJjmYBszpVpkCc91DdikLMIlr/view?usp=sharing"
+                  href="https://drive.google.com/drive/folders/1ozVN14fj_sU8giOZ3fwQ83A2yEHIBx1Q?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.08 }}
@@ -851,7 +889,11 @@ export default function Home() {
             viewport={{ once: true }}
             className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-20"
           >
-            <h2 className="text-4xl font-bold text-white mb-8 text-center">Let's Connect</h2>
+            <h2 className={`text-4xl font-bold mb-8 text-center ${
+              darkMode
+                ? "text-white-800"
+                : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+            }`}>Let's Connect</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Contact Info Cards */}
               <div className="space-y-6">
@@ -1099,7 +1141,7 @@ function ProjectCarousel() {
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className="relative"
             >
-              <h3 className="text-2xl font-bold text-blue-200 mb-2">{projects[current].title}</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mb-2">{projects[current].title}</h3>
               <p className="text-gray-300 mb-4">{projects[current].description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {projects[current].tags.map((tag, idx) => (
