@@ -433,7 +433,7 @@ export default function Home() {
                     <FaGithub size={23} />
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com/in/your-linkedin"
+                    href="https://www.linkedin.com/in/prasath-s-0ba533247"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.2, rotate: 10 }}
@@ -960,7 +960,7 @@ export default function Home() {
           <FaGithub />
         </a>
         <a
-          href="https://linkedin.com/in/prasaths27"
+          href="https://www.linkedin.com/in/prasath-s-0ba533247"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
