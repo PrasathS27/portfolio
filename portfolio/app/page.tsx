@@ -784,7 +784,7 @@ export default function Home() {
                 whileHover={{ scale: 1.08, boxShadow: "0 8px 32px 0 rgba(59,130,246,0.25)" }}
                 className="bg-gradient-to-br from-blue-900/60 to-blue-600/30 rounded-2xl p-8 shadow-xl border border-blue-500/30 transition-all duration-300"
               >
-                <h3 className="text-xl font-bold text-indigo-200 mb-2">Software Development</h3>
+                <h3 className="text-xl font-bold text-indigo-200 mb-2">Software Developer</h3>
                 <p className="text-gray-300">Neartekpod APAC Technologies</p>
                 <motion.a
                   href="https://drive.google.com/file/d/1d1sJn7fxO2CWttNknEmb1x-LTIaOdvlM/view?usp=sharing"
