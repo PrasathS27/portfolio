@@ -44,7 +44,9 @@ function ContactForm() {
     return (
       <div className="flex flex-col items-center justify-center h-full py-10">
         <span className="text-3xl text-blue-400 mb-4 animate-pulse">🎉</span>
-        <h3 className="text-2xl font-bold text-white mb-2">Thanks for Connection..!</h3>
+        <h3 className= "text-2xl font-bold text-white mb-2"
+        
+        >Thanks for Connection..!</h3>
       </div>
     );
   }
@@ -212,7 +214,12 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-2xl font-bold text-white tracking-wide cursor-pointer"
+            className={`text-2xl font-bold tracking-wide cursor-pointer ${
+              darkMode
+                ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                : "bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+            }`}
+
             onClick={handleHomeClick}
           >
             Prasath | Portfolio
@@ -279,7 +286,7 @@ export default function Home() {
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-gradient-to-r from-gray-900 to-blue-900 absolute top-full left-0 w-full z-30 shadow-lg">
-            <ul className="flex flex-col items-center py-4 gap-4 text-white font-medium">
+            <ul className="flex flex-col items-center py-4 gap-4 text-white font-medium ">
               {["About", "Skills", "Projects", "Certifications", "Contact"].map((item) => (
                 <li key={item}>
                   <a
@@ -348,7 +355,11 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className={`text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4${!darkMode ? " text-blue-700 bg-none" : ""}`}
+                className={`text-5xl font-bold mb-4 ${
+                  darkMode
+                    ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+                }`}
               >
                 Prasath Subramanian
               </motion.h1>
@@ -356,10 +367,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1 }}
-                className="text-2xl text-gray-300 mb-6"
+                className={`text-2xl mb-6 ${
+                  darkMode ? "text-gray-300" : "text-blue-700 font-semibold"
+                }`}
               >
                 I'm Determined to be a{" "}
-                <span className="bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent font-semibold">
+                <span className={`font-semibold ${
+                  darkMode
+                    ? "bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent"
+                    : "text-purple-700"
+                }`}>
                   {roleText}
                   <span className="animate-pulse">|</span>
                 </span>
@@ -368,7 +385,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.2 }}
-                className="text-gray-400 leading-relaxed mb-8"
+                className={darkMode ? "text-gray-400 leading-relaxed mb-8" : "text-gray-700 leading-relaxed mb-8"}
               >
                 "Passionate about creating innovative web solutions with modern technologies,
                 Specializing in React.js, Next.js, and Web experiences."
@@ -918,11 +935,19 @@ export default function Home() {
       </div>
 
       {/* Made with love */}
-      <div className="flex justify-center items-center gap-2 text-base sm:text-lg text-gray-300 font-medium mb-4">
+      <div className={`flex justify-center items-center gap-2 text-base sm:text-lg text-gray-300 font-medium mb-4 ${
+        darkMode
+          ? "text-gray-300" 
+          : "text-gray-600"
+      }`}>
         <span>Made with</span>
          <FooterHeart />
         <span>
-          by <span className="font-semibold text-white"> Prasath Subramainan</span>
+          by <span className={` ${
+            darkMode 
+              ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
+              : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
+          }`}>Prasath Subramanian</span>
         </span>
       </div>
 
