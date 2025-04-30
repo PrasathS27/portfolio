@@ -239,42 +239,52 @@ export default function Home() {
               "Contact"
             ];
             return (
-              <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 font-medium items-center">
-                {navItems.map((item) => (
-                  <motion.li
-                    key={item}
-                    whileHover={{ scale: 1.15, rotate: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      onClick={item === "About" ? handleAboutClick : undefined}
-                      className={`relative px-2 py-1 transition-transform duration-200 hover:scale-110 active:scale-95
-                        before:content-[''] before:absolute before:left-0 before:-bottom-1 before:h-0.5 before:bg-blue-400
-                        before:transition-all before:duration-300
-                        ${
-                          activeSection === item.toLowerCase()
-                            ? "before:w-full font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-                            : "before:w-0"
-                        }
-                        ${
-                          !darkMode
-                            ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-                            : "text-white-800"
-                        }
-                      `}
-                      style={{ display: "inline-block" } }
-
+              <>
+                <ul className="hidden md:flex flex-wrap gap-3 md:gap-6 font-medium items-center">
+                  {navItems.map((item) => (
+                    <motion.li
+                      key={item}
+                      whileHover={{ scale: 1.15, rotate: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     >
-                      {item}
-                    </a>
-                  </motion.li>
-                ))}
-
-              </ul>
+                      <a
+                        href={`#${item.toLowerCase()}`}
+                        onClick={item === "About" ? handleAboutClick : undefined}
+                        className={`relative px-2 py-1 transition-transform duration-200 hover:scale-110 active:scale-95
+                          before:content-[''] before:absolute before:left-0 before:-bottom-1 before:h-0.5 before:bg-blue-400
+                          before:transition-all before:duration-300
+                          ${
+                            activeSection === item.toLowerCase()
+                              ? "before:w-full font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                              : "before:w-0"
+                          }
+                          ${
+                            !darkMode
+                              ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                              : "text-white-800"
+                          }
+                        `}
+                        style={{ display: "inline-block" }}
+                      >
+                        {item}
+                      </a>
+                    </motion.li>
+                  ))}
+                  {/* Sun/Moon Toggle for desktop */}
+                  <div className="hidden md:flex items-center ml-0">
+                    <button
+                      onClick={() => setDarkMode((prev) => !prev)}
+                      className="text-yellow-400 text-2xl focus:outline-none flex items-center justify-center"
+                      aria-label="Toggle theme"
+                    >
+                      {darkMode ? <FaMoon /> : <FaSun />}
+                    </button>
+                  </div>
+                </ul>
+              </>
             );
-          })()} 
+          })()}
           {/* Mobile Navbar: Hamburger and Theme Toggle */}
           <div className="flex items-center md:hidden gap-2">
             {/* Sun/Moon Toggle for mobile */}
@@ -292,16 +302,6 @@ export default function Home() {
               aria-label="Open menu"
             >
               <FaBars />
-            </button>
-          </div>
-          {/* Sun/Moon Toggle for desktop */}
-          <div className="hidden md:block ml-2">
-            <button
-              onClick={() => setDarkMode((prev) => !prev)}
-              className="text-yellow-400 text-2xl focus:outline-none"
-              aria-label="Toggle theme"
-            >
-              {darkMode ? <FaMoon /> : <FaSun />}
             </button>
           </div>
         </nav>
@@ -819,6 +819,7 @@ export default function Home() {
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.97 }}
                   className="mt-6 inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 active:scale-95"
+                  // className="mt-6 inline-flex items-center gap-2 px-6 py-2 rounfded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 active:scale-95"
                 >
                   View Certificate
                   {/* Changed icon here */}
