@@ -1047,8 +1047,8 @@ function ProjectCarousel() {
       image: "/portfolio.png",
       title: "Prasath | Portfolio ",
       description:
-        "I built a user-friendly personal portfolio using React (with Next.js) and Tailwind CSS to showcase my professional achievements and skills. The portfolio integrates Framer Motion for animations, Three.js for 3D graphics, and React Icons for improved iconography. Built with TypeScript, JavaScript, JSX/TSX, HTML, and CSS, it is hosted on Netlify for seamless deployment and performance.",
-      tags: ["React JS", "Next JS", "Tailwind CSS", "TypeScript","Netlify"],
+        "I built a user-friendly personal portfolio using React (with Next.js) and Tailwind CSS to showcase my professional achievements and skills. The portfolio integrates Framer Motion for animations, Three.js for 3D graphics, and React Icons for improved iconography. Built with TypeScript, JavaScript, JSX/TSX, HTML, and CSS, it is hosted on Firebase for seamless deployment and performance.",
+      tags: ["React JS", "Next JS", "Tailwind CSS", "TypeScript","Firebase"],
       role: "Fullstack Developer",
       demo: "/",
       demoLabel: "Live Demo",
@@ -1098,7 +1098,7 @@ function ProjectCarousel() {
     "React JS": "bg-cyan-500",
     "Next JS": "bg-gray-800",
     "Tailwind CSS": "bg-blue-400",
-    // Firebase: "bg-yellow-400 text-black",
+    Firebase: "bg-yellow-400 text-black",
     TypeScript: "bg-blue-700",
   };
 
