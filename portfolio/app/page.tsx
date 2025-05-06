@@ -323,7 +323,6 @@ export default function Home() {
             </ul>
           </div>
         )}
-
       </motion.header>
       {/* Add padding top to avoid content being hidden behind navbar */}
       <div className="pt-24 px-2 md:px-4">
