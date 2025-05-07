@@ -1,6 +1,26 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
+/// <reference types="@react-three/fiber" />
 import { OrbitControls, Sphere, Stars } from "@react-three/drei";
+import React from "react";
+import { Canvas } from "@react-three/fiber";
+
+
+import { Object3DNode } from '@react-three/fiber';
+import * as THREE from 'three';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      pointLight: Object3DNode<THREE.PointLight, typeof THREE.PointLight>;
+      directionalLight: Object3DNode<THREE.DirectionalLight, typeof THREE.DirectionalLight>;
+      // meshStandardMaterial: Object3DNode<THREE.MeshStandardMaterial, typeof THREE.MeshStandardMaterial>;
+    }
+  }
+}
+
+
+
+
 
 import Link from "next/link";
 import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaTools, FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaSun, FaMoon, FaBars } from "react-icons/fa";
@@ -24,6 +44,7 @@ import { FaGraduationCap, FaSchool } from "react-icons/fa";
 import { FaOpencart, FaShare } from "react-icons/fa6";
 // import { Typewriter } from 'react-typewriter-effect';
 import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -275,7 +296,7 @@ export default function Home() {
                   <div className="hidden md:flex items-center ml-0">
                     <button
                       onClick={() => setDarkMode((prev) => !prev)}
-                      className="text-yellow-400 text-2xl focus:outline-none flex items-center justify-center"
+                      className="text-yellow-400 text-2xl focus:outline-none flex items-center justify-center transition-transform duration-200 hover:scale-125 hover:text-yellow-400"
                       aria-label="Toggle theme"
                     >
                       {darkMode ? <FaMoon /> : <FaSun />}
@@ -290,7 +311,7 @@ export default function Home() {
             {/* Sun/Moon Toggle for mobile */}
             <button
               onClick={() => setDarkMode((prev) => !prev)}
-              className="text-yellow-400 text-2xl focus:outline-none"
+              className="text-yellow-400 text-2xl focus:outline-none transition-transform duration-200 hover:scale-125 hover:text-yellow-400"
               aria-label="Toggle theme"
             >
               {darkMode ? <FaMoon /> : <FaSun />}
@@ -325,7 +346,10 @@ export default function Home() {
         )}
       </motion.header>
       {/* Add padding top to avoid content being hidden behind navbar */}
+
+      
       <div className="pt-24 px-2 md:px-4">
+        
         {/* Enhanced 3D Background with Motion */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -336,17 +360,10 @@ export default function Home() {
           {/* Render sphere only in dark mode */}
           {darkMode && (
             <Canvas>
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[5, 5, 5]} intensity={1.4} />
-              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-              <Sphere args={[2, 64, 64]}>
-                <meshStandardMaterial
-                  color="#3b82f6"
-                  metalness={0.7}
-                  roughness={0.3}
-                />
-              </Sphere>
-              <Stars radius={100} depth={50} count={2000} factor={4} />
+              {/* <pointLight position={[10, 10, 10]} intensity={1.5} />
+              <directionalLight position={[5, 5, 5]} intensity={1.4} /> */}
+              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.6} />
+              <Stars  radius={100} depth={50} count={2000} factor={4} />
             </Canvas>
           )}
         </motion.div>
