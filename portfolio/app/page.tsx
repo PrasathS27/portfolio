@@ -1,5 +1,4 @@
 "use client";
-/// <reference types="@react-three/fiber" />
 import { OrbitControls, Sphere, Stars } from "@react-three/drei";
 import React from "react";
 import { Canvas } from "@react-three/fiber";
