@@ -23,7 +23,7 @@ declare global {
 
 
 import Link from "next/link";
-import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaTools, FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaSun, FaMoon, FaBars } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaTools, FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaSun, FaMoon, FaBars, FaWhatsapp } from "react-icons/fa";
 import { 
   SiNextdotjs, SiRedux, SiTypescript, SiTailwindcss, SiExpress, SiNestjs, SiSpringboot, 
   SiGithubactions, SiFigma, SiPostman, 
@@ -395,7 +395,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className={`text-5xl font-bold mb-4 ${
                   darkMode
-                    ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                    ? "bg-gradient-to-r from-blue-500 to-purple-400 bg-clip-text text-transparent"
                     : "bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
                 }`}
               >
@@ -412,7 +412,7 @@ export default function Home() {
                 I'm Determined to be a{" "}
                 <span className={`font-semibold ${
                   darkMode
-                    ? "bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent"
+                    ? "bg-gradient-to-r from-blue-500 to-purple-400 bg-clip-text text-transparent"
                     : "text-purple-700"
                 }`}>
                   {roleText}
@@ -893,7 +893,7 @@ export default function Home() {
             </div>
           </motion.section>
 
-        
+      
             
                
             
@@ -962,62 +962,79 @@ export default function Home() {
               <ContactForm />
             </div>
           </motion.section>
+          
           {/* Footer */}
-          <footer className="mt-20 text-center text-gray-400">
-      {/* Social Icons */}
-      <div className="flex justify-center gap-8 mb-6">
-        <a
-          href="https://github.com/PrasathS27"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
-          aria-label="GitHub"
-        >
-          <FaGithub />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/prasath-s-0ba533247"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
-          aria-label="LinkedIn"
-        >
-          <FaLinkedin />
-        </a>
-        <a
-          href="mailto:sprasath003@gmail.com"
-          className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-2xl"
-          aria-label="Email"
-        >
-          <FaEnvelope />
-        </a>
-      </div>
+<footer className="mt-20 text-center text-gray-400 w-full px-4 md:px-0">
+  {/* Social Icons */}
+  <div className="flex justify-center gap-4 md:gap-8 mb-6">
+    <motion.a
+      href="https://github.com/PrasathS27"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-xl md:text-2xl"
+      aria-label="GitHub"
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <FaGithub />
+    </motion.a>
+    <motion.a
+      href="https://www.linkedin.com/in/prasath-s-0ba533247"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-xl md:text-2xl"
+      aria-label="LinkedIn"
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <FaLinkedin />
+    </motion.a>
+    <motion.a
+      href="mailto:sprasath003@gmail.com"
+      className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-xl md:text-2xl"
+      aria-label="Email"
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <FaEnvelope />
+    </motion.a>
+    <motion.a
+      href="https://wa.me/+919994565367"
+      className="hover:text-blue-400 text-gray-400 transition-colors duration-200 text-xl md:text-2xl"
+      target="_blank"
+      aria-label="WhatsApp"
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <FaWhatsapp />
+    </motion.a>
+  </div>
 
-      {/* Made with love */}
-      <div className={`flex justify-center items-center gap-2 text-base sm:text-lg text-gray-300 font-medium mb-4 ${
-        darkMode
-          ? "text-gray-300" 
-          : "text-gray-600"
-      }`}>
-        <span>Made with</span>
-         <FooterHeart />
-        <span>
-          by <span className={` ${
-            darkMode 
-              ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
-              : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
-          }`}>Prasath Subramanian</span>
-        </span>
-      </div>
+  {/* Made with love */}
+  <div className={`flex flex-wrap justify-center items-center gap-2 text-sm md:text-lg text-gray-300 font-medium mb-4 px-2 ${
+    darkMode
+      ? "text-gray-300" 
+      : "text-gray-600"
+  }`}>
+    <span>Made with</span>
+    <FooterHeart />
+    <span>
+      by <span className={`${
+        darkMode 
+          ? "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
+          : "bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold"
+      }`}>Prasath Subramanian</span>
+    </span>
+  </div>
 
-      {/* Divider */}
-      <div className="w-full max-w-xs mx-auto border-t border-blue-900/40 my-4 opacity-30"></div>
+  {/* Divider */}
+  <div className="w-full max-w-xs mx-auto border-t border-blue-900/40 my-4 opacity-30"></div>
 
-      {/* Copyright */}
-      <p className="text-md text-gray-500 tracking-wide">
-        © {new Date().getFullYear()} Prasath S | All rights reserved.
-      </p>
-    </footer>
+  {/* Copyright */}
+  <p className="text-sm md:text-md text-gray-500 tracking-wide px-2">
+    © {new Date().getFullYear()} Prasath S | All rights reserved.
+  </p>
+</footer>
 
         </div>
       </div>
